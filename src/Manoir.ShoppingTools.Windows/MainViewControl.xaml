@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Manoir.ShoppingTools.Windows.MainViewControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Manoir.ShoppingTools.Windows"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:Manoir.ShoppingTools.Windows.Helpers"
+    xmlns:views="using:Manoir.ShoppingTools.Windows.Views"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <helpers:NotNullToVisibilityConverter x:Key="visibleIfNotNull" />
+        <helpers:NullToVisibilityConverter x:Key="visibleIfNull" />
+        <helpers:BoolToVisibilityConverter x:Key="isTrue" />
+        <helpers:BoolToVisibilityConverter x:Key="isFalse" InvertValue="true" />
+        <helpers:StringToVisibilityConverter x:Key="visibleIfEquals" />
+    </UserControl.Resources>
+
+    <Grid>
+        <NavigationView x:Name="nvMainNavigation" SelectionChanged="nvMainNavigation_SelectionChanged"
+                        IsBackButtonVisible="Collapsed"
+                    MenuItemsSource="{x:Bind ViewModel.MainMenuItems}"
+                    IsPaneOpen="True"
+                    IsSettingsVisible="False"
+                    AlwaysShowHeader="false">
+
+            <NavigationView.MenuItemTemplate>
+                <DataTemplate>
+                    <NavigationViewItem Content="{Binding Name}" Tag="SamplePage1" FontSize="18"
+                            IsSelected="{Binding IsSelected}"
+                            IsEnabled="{Binding IsEnabled}"
+                            Margin="0,2,0,2" Padding="0,10,0,10">
+                        <NavigationViewItem.Icon>
+                            <ImageIcon Height="48" Width="48" Source="{Binding ImageUrl}" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                </DataTemplate>
+            </NavigationView.MenuItemTemplate>
+
+
+            <Grid Background="#F3F0F4" Visibility="{x:Bind ViewModel.CurrentPage,Mode= OneWay, ConverterParameter=Accueil, Converter={StaticResource visibleIfNull}}">
+                <views:HomePage />
+            </Grid>
+
+
+        </NavigationView>
+    </Grid>
+</UserControl>

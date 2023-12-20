@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Manoir.ShoppingTools.Windows (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Manoir.ShoppingTools.Windows (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
